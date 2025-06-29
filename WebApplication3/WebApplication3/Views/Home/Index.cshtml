@@ -1,0 +1,50 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using WebApplication3.Models
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+@model WebApplication3.ViewModels.MainViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+-->
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <!--
+    <div>user: @User.Identity.Name</div>
+    <div>Hello @Model.RegisterView.FirstName!</div>
+    <a asp-area="" asp-controller="AccountManager" asp-action="Logout">Выход</a>
+    -->
+    <partial name="_LoginPartial" />
+}
+else
+{
+<div class="row">
+    <div class="side">
+        <div class="center">
+            Пользуйтесь нашей самой крутой соцсетью! Регистрируйтесь всего за 2 минуты, делитесь мыслями, находите новых друзей.
+        </div>
+        <!--
+        <img class="main-img" src="http://pngimg.com/uploads/husky/husky_PNG19.png" />
+        -->
+        <img class="main-img" src="https://place-hold.it/800x600" />
+    </div>
+
+
+    <div class="main">
+        <partial name="Login" model="Model.LoginView" />
+        <partial name="Register" model="Model.RegisterView" />
+    </div>
+
+</div>
+}
